@@ -53,7 +53,12 @@ export async function GET() {
       .populate('pet', 'name species ownerName')
       .lean();
     return NextResponse.json(services);
-  } catch {
+  } catch(err: unknown) {
+    if (err instanceof Error) {
+      console.log(err.message);
+    } else {
+      console.log('Erro desconhecido');
+    }
     return NextResponse.json({ error: 'Erro ao listar serviços' }, { status: 500 });
   }
 }
