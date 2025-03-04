@@ -1,3 +1,4 @@
+export const maxDuration = 60;
 import dbConnect from '@/lib/db';
 import Service from '@/models/Service';
 import { NextRequest, NextResponse } from 'next/server';
