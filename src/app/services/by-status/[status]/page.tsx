@@ -84,7 +84,7 @@ export default function ServicesByStatus() {
         <div className="grid gap-4">
           {services.map((service) => {
             return (
-              <div key={service._id} className="p-4 border rounded shadow-sm bg-white">
+              <div key={service._id} className="p-4 rounded-lg shadow-md bg-white">
                 <p>
                   <strong>Tipo(s):</strong>{' '}
                   {Array.isArray(service.type) ? service.type.join(', ') : service.type || 'Não especificado'}

@@ -23,9 +23,9 @@ export default function Header() {
   return (
     <header className="bg-blue-600 text-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-2xl font-bold">
-          <Link href="/dashboard">Petshop Manager</Link>
-        </h1>
+      <h1 className="text-2xl font-bold text-white">
+        <a href="/dashboard">Petshop Manager</a>
+      </h1>
         
         {/* Mobile Menu Button */}
         <button
@@ -62,7 +62,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <nav className="lg:hidden flex flex-col items-center bg-blue-700 text-white p-4 space-y-2">
+        <nav className="lg:hidden flex flex-col items-center bg-blue-700 text-white p-4 mt-3 space-y-2">
           {!isDashboard && (
             <button
               onClick={handleBack}
