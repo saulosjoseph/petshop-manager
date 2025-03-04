@@ -1,0 +1,28 @@
+<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .pixel { fill: #333; }
+    </style>
+  </defs>
+
+  <!-- Cachorro (Dog) -->
+  <rect class="pixel" x="10" y="60" width="5" height="5" />
+  <rect class="pixel" x="15" y="60" width="5" height="5" />
+  <rect class="pixel" x="10" y="65" width="10" height="5" />
+  <rect class="pixel" x="5" y="65" width="5" height="5" />
+  <rect class="pixel" x="20" y="65" width="5" height="5" />
+
+  <!-- Gato (Cat) -->
+  <rect class="pixel" x="40" y="50" width="5" height="5" />
+  <rect class="pixel" x="45" y="50" width="5" height="5" />
+  <rect class="pixel" x="40" y="55" width="10" height="5" />
+  <rect class="pixel" x="35" y="55" width="5" height="5" />
+  <rect class="pixel" x="50" y="55" width="5" height="5" />
+
+  <!-- Rato (Mouse) -->
+  <rect class="pixel" x="70" y="70" width="5" height="5" />
+  <rect class="pixel" x="75" y="70" width="5" height="5" />
+  <rect class="pixel" x="70" y="75" width="10" height="5" />
+  <rect class="pixel" x="65" y="75" width="5" height="5" />
+  <rect class="pixel" x="80" y="75" width="5" height="5" />
+</svg>

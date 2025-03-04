@@ -6,19 +6,31 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fef9f3;
+  --foreground: #333333;
+  --primary: #ff914d;
+  --secondary: #ffcc80;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1a1a1a;
+    --foreground: #f5f5f5;
+    --primary: #ffb38a;
+    --secondary: #ffd9b3;
   }
 }
 
 body {
   color: black;
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #F2F2F1;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Ajustando o fundo para mais claridade */
+.bg-pet-pattern {
+  background-image: url('/images/pet-background.webp');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: 20% 20%;
 }

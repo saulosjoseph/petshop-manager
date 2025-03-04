@@ -2,10 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { FiMenu, FiX } from 'react-icons/fi';
 
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const isDashboard = pathname === '/dashboard';
 
@@ -23,7 +26,17 @@ export default function Header() {
         <h1 className="text-2xl font-bold">
           <Link href="/dashboard">Petshop Manager</Link>
         </h1>
-        <div className="flex items-center space-x-4">
+        
+        {/* Mobile Menu Button */}
+        <button
+          className="lg:hidden text-white text-2xl"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <FiX /> : <FiMenu />}
+        </button>
+
+        {/* Desktop Menu */}
+        <nav className="hidden lg:flex items-center space-x-4">
           {!isDashboard && (
             <button
               onClick={handleBack}
@@ -44,8 +57,34 @@ export default function Header() {
           >
             Novo Pet
           </Link>
-        </div>
+        </nav>
       </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <nav className="lg:hidden flex flex-col items-center bg-blue-700 text-white p-4 space-y-2">
+          {!isDashboard && (
+            <button
+              onClick={handleBack}
+              className="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200 w-full text-center"
+            >
+              Voltar
+            </button>
+          )}
+          <Link
+            href="/services/new"
+            className="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200 w-full text-center"
+          >
+            Novo Serviço
+          </Link>
+          <Link
+            href="/pets/new"
+            className="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200 w-full text-center"
+          >
+            Novo Pet
+          </Link>
+        </nav>
+      )}
     </header>
   );
 }
