@@ -1,4 +1,5 @@
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from "@vercel/analytics/react"
 import './globals.css';
 import Header from './components/Header';
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
           <main className="container mx-auto p-4 bg-white shadow-lg rounded-lg mt-4 ">{children}</main>
           <SpeedInsights />
+          <Analytics />
         </div>
       </body>
     </html>
