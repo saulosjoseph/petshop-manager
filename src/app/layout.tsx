@@ -1,5 +1,7 @@
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import Header from './components/Header';
+
 
 export const metadata = {
   title: 'Petshop Manager',
@@ -16,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="relative z-10">
           <Header />
           <main className="container mx-auto p-4 bg-white shadow-lg rounded-lg mt-4 ">{children}</main>
+          <SpeedInsights />
         </div>
       </body>
     </html>
