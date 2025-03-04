@@ -39,8 +39,9 @@ export async function POST(req: NextRequest) {
 
     const service = await Service.create(serviceData);
     return NextResponse.json({ message: 'Serviço cadastrado com sucesso', service }, { status: 201 });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message || 'Erro ao cadastrar serviço' }, { status: 500 });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Erro ao cadastrar serviço';
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
 
@@ -52,7 +53,7 @@ export async function GET() {
       .populate('pet', 'name species ownerName')
       .lean();
     return NextResponse.json(services);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Erro ao listar serviços' }, { status: 500 });
   }
 }
@@ -141,7 +142,8 @@ export async function PATCH(req: NextRequest) {
     const updatedService = await service.save();
     await updatedService.populate('pet', 'name species ownerName');
     return NextResponse.json({ message: 'Serviço atualizado com sucesso', service: updatedService });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message || 'Erro ao atualizar serviço' }, { status: 500 });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Erro ao atualizar serviço';
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

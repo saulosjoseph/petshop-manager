@@ -29,8 +29,12 @@ export default function NewServicePage() {
         if (!res.ok) throw new Error('Erro ao carregar pets');
         const data = await res.json();
         setPets(data);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Erro desconhecido');
+        }
       }
     };
     fetchPets();
@@ -47,7 +51,7 @@ export default function NewServicePage() {
         ...prev,
         street: `${data.street}, ${data.neighborhood}, ${data.city} - ${data.state}`,
       }));
-    } catch (err: any) {
+    } catch {
       setError('CEP inválido ou não encontrado');
     }
   };
@@ -103,8 +107,12 @@ export default function NewServicePage() {
         notes: '',
       });
       setTimeout(() => router.push('/dashboard'), 1000);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Erro desconhecido');
+      }
     } finally {
       setLoading(false);
     }

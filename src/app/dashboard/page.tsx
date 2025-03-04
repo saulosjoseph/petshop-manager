@@ -29,8 +29,12 @@ export default function Dashboard() {
           { pending: 0, fetching: 0, in_progress: 0, returning: 0, completed: 0 }
         );
         setStatusCounts(counts);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Erro desconhecido');
+        }
       } finally {
         setLoading(false);
       }

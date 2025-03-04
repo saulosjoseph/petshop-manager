@@ -23,13 +23,17 @@ export default function EditService() {
         if (!foundService) throw new Error('Serviço não encontrado');
         setService(foundService);
         setForm({
-          type: Array.isArray(foundService.type) ? foundService.type : [foundService.type] || [],
+          type: Array.isArray(foundService.type) ? foundService.type : [foundService.type],
           scheduledDate: new Date(foundService.scheduledDate).toISOString().slice(0, 16),
           taxi: foundService.taxi || false,
           notes: foundService.notes || '',
         });
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Erro desconhecido');
+        }
       } finally {
         setLoading(false);
       }
@@ -58,8 +62,12 @@ export default function EditService() {
       if (!res.ok) throw new Error('Erro ao atualizar serviço');
       setSuccess('Serviço atualizado com sucesso!');
       setTimeout(() => router.push(`/services/by-status/${service?.status}`), 1000);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Erro desconhecido');
+      }
     } finally {
       setLoading(false);
     }

@@ -40,8 +40,12 @@ export default function NewPetPage() {
       setSuccess('Pet cadastrado com sucesso!');
       setForm({ name: '', species: '', ownerName: '', contactNumber: '', address: '', birthDate: '', notes: '' });
       setTimeout(() => router.push('/dashboard'), 1000); // Redireciona após 1s
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Erro desconhecido');
+      }
     } finally {
       setLoading(false);
     }

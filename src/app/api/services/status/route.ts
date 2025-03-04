@@ -1,5 +1,4 @@
 import dbConnect from '@/lib/db';
-import Pet from '@/models/Pet'; // Importar Pet explicitamente
 import Service from '@/models/Service';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -58,7 +57,10 @@ export async function PATCH(req: NextRequest) {
         const updatedService = await service.save();
         await updatedService.populate('pet', 'name species ownerName');
         return NextResponse.json({ message: 'Serviço atualizado com sucesso', service: updatedService });
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message || 'Erro ao atualizar serviço' }, { status: 500 });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return NextResponse.json({ error: error.message || 'Erro ao atualizar serviço' }, { status: 500 });
+        }
+        return NextResponse.json({ error: 'Erro ao atualizar serviço' }, { status: 500 });
     }
 }

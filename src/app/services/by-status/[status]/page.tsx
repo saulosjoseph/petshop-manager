@@ -36,8 +36,12 @@ export default function ServicesByStatus() {
         const data: Service[] = await res.json();
         const filteredServices = data.filter((service) => service.status === status);
         setServices(filteredServices);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Erro desconhecido');
+        }
       } finally {
         setLoading(false);
       }
@@ -59,8 +63,12 @@ export default function ServicesByStatus() {
       // Redireciona para a página do novo status
       router.push(`/services/by-status/${updatedService.service.status}`);
       
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Erro desconhecido');
+      }
     }
   };
 
