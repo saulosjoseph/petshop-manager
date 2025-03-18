@@ -3,7 +3,7 @@ declare global {
     // eslint-disable-next-line no-var, @typescript-eslint/no-explicit-any
     var mongoose: any; // This must be a `var` and not a `let / const`
   }
-const MONGODB_URI = process.env.MONGODB_URI || '';
+const MONGODB_URI = process.env.MONGODB_URI ?? '';
 
 if (!MONGODB_URI) {
   throw new Error('Please define MONGODB_URI environment variable');

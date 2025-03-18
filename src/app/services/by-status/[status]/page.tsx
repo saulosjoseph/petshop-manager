@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { Service } from '@/types';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { getServiceLabel } from '@/utils/serviceLabels';
+import { getStatusLabel } from '@/utils/statusLabels';
 
 export default function ServicesByStatus() {
   const { status } = useParams();
@@ -72,25 +74,30 @@ export default function ServicesByStatus() {
     }
   };
 
+  const getLabels = (values:  ("bath" | "grooming" | "vet" | "boarding")[]) => {
+    const labels = values.map((value) => getServiceLabel(value))
+    return labels.join(', ')
+  }
+
   if (loading) return <div className="text-center p-4">Carregando...</div>;
   if (error) return <div className="text-center p-4 text-red-500">{error}</div>;
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Serviços - {status?.toString().replace('_', ' ')}</h2>
+      <h2 className="text-2xl font-bold mb-4">Serviços - {getStatusLabel(status?.toString() ?? '')}</h2>
       {services.length === 0 ? (
         <p className="text-gray-500">Nenhum serviço neste status.</p>
       ) : (
-        <div className="grid gap-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => {
             return (
               <div key={service._id} className="p-4 rounded-lg shadow-md bg-white">
                 <p>
                   <strong>Tipo(s):</strong>{' '}
-                  {Array.isArray(service.type) ? service.type.join(', ') : service.type || 'Não especificado'}
+                  {Array.isArray(service.type) ? getLabels(service.type) : getServiceLabel(service.type) || 'Não especificado'}
                 </p>
                 <p>
-                  <strong>Status:</strong> {service.status}
+                  <strong>Status:</strong> {getStatusLabel(service.status)}
                 </p>
                 <p>
                   <strong>Data Agendada:</strong> {new Date(service.scheduledDate).toLocaleDateString('pt-BR')}
@@ -104,6 +111,14 @@ export default function ServicesByStatus() {
                 <p>
                   <strong>Táxi:</strong> {service.taxi !== undefined ? (service.taxi ? 'Sim' : 'Não') : 'Não especificado'}
                 </p>
+                {service.type.find((type) => type === 'vet') && (
+                  <Link
+                    href={`/services/consulta/${service._id}`}
+                    className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 mt-2"
+                  >                    
+                    Iniciar consulta
+                  </Link>
+                )}
                 {service.taxi && service.street && service.number && (
                   <button
                     onClick={() => handleOpenMap(service)}

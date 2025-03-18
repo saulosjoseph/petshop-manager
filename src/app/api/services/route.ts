@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     serviceData.taxi = typeof serviceData.taxi === 'boolean' ? serviceData.taxi : false;
 
     if (serviceData.taxi) {
-      const taxiFields = ['cep', 'street', 'number'];
+      const taxiFields = ['street', 'number'];
       for (const field of taxiFields) {
         if (!serviceData[field]) {
           return NextResponse.json({ error: `Campo ${field} é obrigatório quando necessita de táxi` }, { status: 400 });
@@ -134,7 +134,7 @@ export async function PATCH(req: NextRequest) {
       }
 
       if (updates.taxi) {
-        const taxiFields = ['cep', 'street', 'number'];
+        const taxiFields = ['street', 'number'];
         for (const field of taxiFields) {
           if (!updates[field]) {
             return NextResponse.json({ error: `Campo ${field} é obrigatório quando necessita de táxi` }, { status: 400 });

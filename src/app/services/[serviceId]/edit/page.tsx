@@ -137,7 +137,7 @@ export default function EditService() {
                   onChange={handleChange}
                   className="mr-2"
                 />
-                Necessita de Táxi
+                Táxi
               </label>
             </div>
             <div>

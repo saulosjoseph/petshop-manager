@@ -63,13 +63,13 @@ export default function NewServicePage() {
     setSuccess('');
 
     if (form.type.length === 0) {
-      setError('Selecione pelo menos um tipo de serviço');
+      setError('Selecione pelo menos um serviço');
       setLoading(false);
       return;
     }
 
-    if (form.taxi && (!form.cep || !form.street || !form.number)) {
-      setError('Preencha todos os campos de endereço para serviços com táxi');
+    if (form.taxi && (!form.street || !form.number)) {
+      setError('Preencha endereço e número para serviços com táxi');
       setLoading(false);
       return;
     }
@@ -160,7 +160,7 @@ export default function NewServicePage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Tipo de Serviço</label>
+            <label className="block text-sm font-medium text-gray-700">Serviço</label>
             <select
               name="type"
               multiple
@@ -195,7 +195,7 @@ export default function NewServicePage() {
                 onChange={handleChange}
                 className="mr-2"
               />
-              Necessita de Táxi
+              Táxi
             </label>
           </div>
           {form.taxi && (
@@ -209,7 +209,7 @@ export default function NewServicePage() {
                   onChange={handleChange}
                   className="mt-1 p-2 w-full border rounded"
                   maxLength={8}
-                  required={form.taxi}
+                  // required={form.taxi}
                 />
               </div>
               <div>
@@ -252,9 +252,8 @@ export default function NewServicePage() {
         <button
           type="submit"
           disabled={loading}
-          className={`mt-4 w-full p-2 rounded text-white ${
-            loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
-          }`}
+          className={`mt-4 w-full p-2 rounded text-white ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+            }`}
         >
           {loading ? 'Cadastrando...' : 'Cadastrar Serviço'}
         </button>
