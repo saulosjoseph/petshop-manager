@@ -27,6 +27,7 @@ export default function VetAnamnesisForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setPrescription("Gerando prescrição. Aguarde um momento...");
         console.log("Formulário enviado:", formData);
 
         const completion = await groq.chat.completions.create({
@@ -58,7 +59,7 @@ Identificar possíveis condições de saúde que o animal pode ter, considerando
                 <textarea name="medicalHistory" placeholder="Histórico Médico" value={formData.medicalHistory} onChange={handleChange} className="w-full p-2 border rounded" />
                 <textarea name="currentMedications" placeholder="Medicações Atuais" value={formData.currentMedications} onChange={handleChange} className="w-full p-2 border rounded" />
                 <textarea name="observations" placeholder="Observações Adicionais" value={formData.observations} onChange={handleChange} className="w-full p-2 border rounded" />
-                <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">Gerar prescrição</button>
+                <button disabled={prescription.length > 0} type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">Gerar prescrição</button>
             </form>
             {prescription && (
                 <div className="mt-6 p-4 bg-gray-100 rounded-lg">
